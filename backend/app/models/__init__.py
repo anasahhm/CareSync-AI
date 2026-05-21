@@ -221,7 +221,6 @@ class GestureEvent(Base):
 
     consultation: Mapped["Consultation"] = relationship(back_populates="gesture_events")
 
-
 # ── AI Reports ────────────────────────────────────────────────────────────────
 
 class AIReport(Base):
