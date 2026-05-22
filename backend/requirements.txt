@@ -31,6 +31,7 @@ python-dateutil==2.8.2
 uuid6==2025.0.1
 # RAG (V2) - all free/local, no paid API required
 sentence-transformers==3.0.1
+transformers==4.41.2
 faiss-cpu==1.8.0
 qdrant-client==1.9.1
 # Observability (V2)
