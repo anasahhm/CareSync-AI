@@ -1,4 +1,4 @@
-# CareSyncAI V2
+# CareSyncAI
 
 > **A 17-agent, real-time collaborative medical AI platform** — vision-aware, memory-aware, RAG-backed, and GPU/ROCm-accelerated, built on top of the original GestureMed AI gesture-controlled telemedicine platform.
 
