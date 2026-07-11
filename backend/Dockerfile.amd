@@ -1,0 +1,36 @@
+# CareSyncAI V2 - AMD ROCm backend image
+# Base: rocm/pytorch ships ROCm userspace libraries + a ROCm-built torch,
+# so app/gpu/device_manager.py's `torch.version.hip` check resolves to a
+# real value instead of None. Falls back to CPU automatically (same code
+# path as the plain Dockerfile) if run on a box with no AMD GPU / no
+# --device=/dev/kfd passthrough - this image does not require a GPU to
+# start, it only takes advantage of one when present.
+FROM rocm/pytorch:rocm6.1_ubuntu22.04_py3.10_pytorch_2.1.2
+
+RUN apt-get update && apt-get install -y \
+    libgl1-mesa-glx \
+    libglib2.0-0 \
+    libsm6 \
+    libxext6 \
+    libxrender-dev \
+    libgomp1 \
+    ffmpeg \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# torch is already provided by the rocm/pytorch base image - do NOT
+# reinstall it from requirements-gpu.txt here, that would replace the
+# ROCm-linked build with a CPU-only wheel from PyPI.
+
+COPY . .
+
+EXPOSE 8000
+
+ENV GPU_BACKEND=rocm
+ENV HSA_OVERRIDE_GFX_VERSION=10.3.0
+
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
