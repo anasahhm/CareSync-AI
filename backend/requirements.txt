@@ -1,0 +1,38 @@
+fastapi==0.111.0
+uvicorn[standard]==0.30.1
+python-socketio==5.11.2
+sqlalchemy[asyncio]==2.0.30
+asyncpg==0.29.0
+alembic==1.13.1
+redis[asyncio]==5.0.4
+celery==5.4.0
+bcrypt==4.0.1
+pydantic==2.7.1
+pydantic-settings==2.3.0
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+python-multipart==0.0.9
+mediapipe==0.10.14
+opencv-python-headless==4.9.0.80
+numpy==1.26.4
+langchain==0.2.5
+langchain-openai==0.1.8
+langchain-anthropic==0.1.15
+openai==1.35.3
+anthropic==0.29.0
+reportlab==4.2.2
+httpx==0.27.0
+aiofiles==23.2.1
+pillow==10.3.0
+# Band of Agents dependencies
+aioredis==2.0.1
+tenacity==8.2.3
+python-dateutil==2.8.2
+uuid6==2025.0.1
+# RAG (V2) - all free/local, no paid API required
+sentence-transformers==3.0.1
+transformers==4.41.2
+faiss-cpu==1.8.0
+qdrant-client==1.9.1
+# Observability (V2)
+prometheus-client==0.20.0
