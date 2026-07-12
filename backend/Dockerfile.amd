@@ -8,7 +8,7 @@
 FROM rocm/pytorch:rocm6.1_ubuntu22.04_py3.10_pytorch_2.1.2
 
 RUN apt-get update && apt-get install -y \
-    libgl1-mesa-glx \
+    libgl1 \
     libglib2.0-0 \
     libsm6 \
     libxext6 \
@@ -20,6 +20,7 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /app
 
 COPY requirements.txt .
+RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
 
 # torch is already provided by the rocm/pytorch base image - do NOT
@@ -31,6 +32,5 @@ COPY . .
 EXPOSE 8000
 
 ENV GPU_BACKEND=rocm
-ENV HSA_OVERRIDE_GFX_VERSION=10.3.0
 
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
