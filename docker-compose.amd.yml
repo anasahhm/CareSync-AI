@@ -1,4 +1,4 @@
-# CareSyncAI V2 - AMD Developer Cloud / ROCm deployment
+# CareSyncAI  - AMD Developer Cloud / ROCm deployment
 #
 # This is an ADDITIVE compose file, not a replacement for docker-compose.yml:
 # it reuses the same backend/frontend build contexts and adds the V2
@@ -105,7 +105,8 @@ services:
       REFRESH_TOKEN_EXPIRE_DAYS: 7
       OPENAI_API_KEY: ${OPENAI_API_KEY:-}
       ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
-      CORS_ORIGINS: "http://localhost:3000,http://frontend:3000"
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:3000,http://frontend:3000}
       ENVIRONMENT: ${ENVIRONMENT:-production}
       GPU_ENABLED: "true"
       GPU_BACKEND: ${GPU_BACKEND:-rocm}
@@ -149,6 +150,11 @@ services:
       OPENAI_API_KEY: ${OPENAI_API_KEY:-}
       ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
       GPU_BACKEND: ${GPU_BACKEND:-rocm}
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+      AI_PROVIDER: ${AI_PROVIDER:-gemini}
+      AI_MODEL: ${AI_MODEL:-gemini-3.5-flash}
+      OLLAMA_FALLBACK_MODEL: ${OLLAMA_FALLBACK_MODEL:-llama3.2:latest}
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:3000,http://frontend:3000}
     depends_on:
       - backend
       - redis
@@ -160,6 +166,9 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:8000}
+        NEXT_PUBLIC_WS_URL: ${NEXT_PUBLIC_WS_URL:-ws://localhost:8000}
     restart: unless-stopped
     environment:
       NEXT_PUBLIC_API_URL: http://localhost:8000

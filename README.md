@@ -8,7 +8,7 @@
 
 ## What this is
 
-CareSyncAI V2 evolves the original GestureMed AI product (gesture-controlled, WebRTC video telemedicine with Claude-generated reports) into a full multi-agent clinical decision-support system, while keeping every original feature working:
+CareSyncAI V2 evolves the original Caresync AI product (gesture-controlled, WebRTC video telemedicine with Claude-generated reports) into a full multi-agent clinical decision-support system, while keeping every original feature working:
 
 - **17 agents** run in a dependency-ordered, real-time collaborative pipeline (not sequential) — the original 7 (Clinical Review, Medical History, Compliance & Privacy, Triage Escalation, Treatment Recommendation, Insurance Verification, Followup Coordination) plus 10 added in V2 (Chief Orchestrator, Symptom, Diagnostic, Medical Research, Evidence, Hallucination Detection, Quality Assurance, Consensus Moderator, Explanation, Escalation).
 - **Real consensus**, not a vote count: weighted confidence scoring, moderator tie-breaking, and a dedicated safety-net escalation agent that aggregates every risk signal raised during the run.
