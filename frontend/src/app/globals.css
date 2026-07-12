@@ -1,0 +1,368 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&family=DM+Sans:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap");
+
+:root {
+  --font-mono: "DM Mono", ui-monospace, monospace;
+  --font-sans: "DM Sans", system-ui, sans-serif;
+  --font-display: "Instrument Serif", serif;
+
+  /* GestureMed color tokens */
+  --gm-bg: #060608;
+  --gm-surface: #0d0d12;
+  --gm-panel: #11111a;
+  --gm-border: #1a1a28;
+  --gm-border-light: #252535;
+  --gm-accent: #3b82f6;
+  --gm-teal: #14b8a6;
+  --gm-purple: #8b5cf6;
+  --gm-amber: #f59e0b;
+  --gm-red: #ef4444;
+  --gm-green: #10b981;
+  --gm-text: #f1f5f9;
+  --gm-muted: #64748b;
+  --gm-dim: #334155;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--gm-bg);
+  color: var(--gm-text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+::-webkit-scrollbar-track {
+  background: var(--gm-surface);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--gm-border-light);
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gm-muted);
+}
+
+/* Utility classes */
+@layer utilities {
+  .gm-glass {
+    background: rgba(13, 13, 18, 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--gm-border);
+  }
+
+  .gm-panel {
+    background: var(--gm-panel);
+    border: 1px solid var(--gm-border);
+    border-radius: 12px;
+  }
+
+  .gm-gradient-text {
+    background: linear-gradient(135deg, #60a5fa, #818cf8, #a78bfa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .gm-ambient {
+    position: relative;
+  }
+
+  .gm-ambient::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), transparent 50%, rgba(139, 92, 246, 0.15));
+    border-radius: inherit;
+    pointer-events: none;
+  }
+
+  .gm-glow-blue {
+    box-shadow: 0 0 30px rgba(59, 130, 246, 0.15), 0 0 60px rgba(59, 130, 246, 0.05);
+  }
+
+  .gm-glow-purple {
+    box-shadow: 0 0 30px rgba(139, 92, 246, 0.15), 0 0 60px rgba(139, 92, 246, 0.05);
+  }
+
+  .gm-glow-teal {
+    box-shadow: 0 0 30px rgba(20, 184, 166, 0.15), 0 0 60px rgba(20, 184, 166, 0.05);
+  }
+}
+
+/* Focus ring */
+*:focus-visible {
+  outline: 2px solid var(--gm-accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Video element defaults */
+video {
+  display: block;
+}
+
+/* Remove default button styles */
+button {
+  cursor: pointer;
+  font-family: inherit;
+}
+
+/* Monospace numbers */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+  font-family: var(--font-mono);
+}
+
+/* Animated gradient background for hero */
+.gradient-mesh {
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 40%, rgba(59, 130, 246, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 80% at 80% 60%, rgba(139, 92, 246, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 40% at 50% 10%, rgba(20, 184, 166, 0.05) 0%, transparent 60%),
+    var(--gm-bg);
+}
+
+/* ════════════════════════════════════════════════════════════════
+   CareSync AI — Nav & Auth visual refresh
+   (styling only — no logic/behaviour here, just presentation classes
+   used by the main nav, sign in, sign up, and role-select screens)
+   ════════════════════════════════════════════════════════════════ */
+
+/* Wordmark */
+.cs-logo {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.5rem;
+  line-height: 1;
+  letter-spacing: 0.01em;
+  color: var(--gm-text);
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  text-decoration: none;
+  user-select: none;
+}
+.cs-logo .cs-logo-tag {
+  font-family: var(--font-mono);
+  font-style: normal;
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gm-accent);
+  padding: 0.15rem 0.4rem;
+  border: 1px solid rgba(59, 130, 246, 0.4);
+  border-radius: 4px;
+}
+
+/* Nav / text links with corner-accent + rolling text hover */
+.cs-nav-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: rgba(241, 245, 249, 0.55);
+  padding: 0.5rem 0.85rem;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  transition: border-color 0.18s ease, background 0.18s ease, color 0.18s ease;
+  overflow: hidden;
+  cursor: pointer;
+  background: none;
+}
+.cs-nav-link:hover {
+  border-color: var(--gm-border-light);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--gm-text);
+}
+.cs-nav-link .cs-corner-tl,
+.cs-nav-link .cs-corner-br {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  opacity: 0;
+  transition: opacity 0.18s ease;
+  pointer-events: none;
+}
+.cs-nav-link .cs-corner-tl {
+  top: -1px;
+  left: -1px;
+  border-top: 1px solid var(--gm-accent);
+  border-left: 1px solid var(--gm-accent);
+}
+.cs-nav-link .cs-corner-br {
+  bottom: -1px;
+  right: -1px;
+  border-bottom: 1px solid var(--gm-accent);
+  border-right: 1px solid var(--gm-accent);
+}
+.cs-nav-link:hover .cs-corner-tl,
+.cs-nav-link:hover .cs-corner-br {
+  opacity: 1;
+}
+.cs-nav-link .cs-link-text {
+  display: block;
+  overflow: hidden;
+  height: 1em;
+}
+.cs-nav-link .cs-link-track {
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.4s cubic-bezier(0.76, 0, 0.24, 1);
+}
+.cs-nav-link:hover .cs-link-track {
+  transform: translateY(-50%);
+}
+.cs-nav-link .cs-link-track span {
+  display: block;
+  height: 1em;
+  line-height: 1em;
+}
+.cs-nav-link .cs-link-track span:last-child {
+  color: var(--gm-text);
+}
+
+/* Sweep-fill bordered button (CTA) */
+.cs-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: none;
+  border: 1px solid var(--gm-accent);
+  border-radius: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gm-accent);
+  padding: 0.6rem 1.15rem;
+  text-decoration: none;
+  cursor: pointer;
+  overflow: hidden;
+  z-index: 1;
+  transition: color 0.3s ease;
+}
+.cs-btn::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  background: var(--gm-accent);
+  z-index: -1;
+  transition: width 0.3s ease;
+}
+.cs-btn:hover {
+  color: #04070d;
+}
+.cs-btn:hover::after {
+  width: 100%;
+}
+.cs-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.cs-btn span.cs-plus {
+  opacity: 0.7;
+}
+
+/* Muted/outline variant, for secondary actions (Back, etc.) */
+.cs-btn-muted {
+  border-color: var(--gm-border-light);
+  color: rgba(241, 245, 249, 0.65);
+}
+.cs-btn-muted::after {
+  background: rgba(241, 245, 249, 0.92);
+}
+.cs-btn-muted:hover {
+  color: #060608;
+}
+
+/* Full-bleed variant for form submit buttons */
+.cs-btn-block {
+  width: 100%;
+  padding: 0.9rem 1.25rem;
+  font-size: 0.8rem;
+}
+
+/* Larger variant, for hero / closing-section CTAs */
+.cs-btn-lg {
+  padding: 0.95rem 1.75rem;
+  font-size: 0.85rem;
+  border-radius: 8px;
+}
+
+/* Auth card shell */
+.cs-auth-card {
+  position: relative;
+  background: var(--gm-surface);
+  border: 1px solid var(--gm-border);
+  border-radius: 4px;
+}
+.cs-auth-card .cs-corner-tl,
+.cs-auth-card .cs-corner-br {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  pointer-events: none;
+}
+.cs-auth-card .cs-corner-tl {
+  top: -1px;
+  left: -1px;
+  border-top: 1px solid var(--gm-accent);
+  border-left: 1px solid var(--gm-accent);
+}
+.cs-auth-card .cs-corner-br {
+  bottom: -1px;
+  right: -1px;
+  border-bottom: 1px solid var(--gm-accent);
+  border-right: 1px solid var(--gm-accent);
+}
+
+/* Role-select cards on the sign-up screen */
+.cs-role-card {
+  font-family: var(--font-sans);
+  border-radius: 4px;
+}
+.cs-role-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+.cs-role-name {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.15rem;
+  line-height: 1.1;
+}
