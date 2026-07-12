@@ -1,8 +1,8 @@
-# CareSyncAI V2 — System Design
+# CareSyncAI : System Design
 
 ## Problem statement
 
-Telehealth triage today is either a human doctor doing everything unaided, or a single LLM prompt producing an unstructured, ungrounded, unverifiable answer. Neither scales safely: the first doesn't scale at all, the second hallucinates with no safety net. CareSyncAI V2's premise is that **decomposing clinical reasoning into specialized, auditable agents that must show their evidence and can be overruled by a dedicated safety layer** is a more trustworthy middle ground than either extreme.
+Telehealth triage today is either a human doctor doing everything unaided, or a single LLM prompt producing an unstructured, ungrounded, unverifiable answer. Neither scales safely: the first doesn't scale at all, the second hallucinates with no safety net. CareSyncAI premise is that **decomposing clinical reasoning into specialized, auditable agents that must show their evidence and can be overruled by a dedicated safety layer** is a more trustworthy middle ground than either extreme.
 
 ## Solution shape
 
