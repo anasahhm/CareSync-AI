@@ -1,6 +1,6 @@
-# CareSyncAI V2
+# CareSyncAI
 
-> **A 17-agent, real-time collaborative medical AI platform** — vision-aware, memory-aware, RAG-backed, and GPU/ROCm-accelerated, built on top of the original GestureMed AI gesture-controlled telemedicine platform.
+> **A 17-agent, real-time collaborative medical AI platform** : vision-aware, memory-aware, RAG-backed, and GPU/ROCm-accelerated, built on top of the original GestureMed AI gesture-controlled telemedicine platform.
 
 **Stack:** FastAPI · Next.js 15 · Socket.IO · PostgreSQL · Redis · Qdrant (+ FAISS fallback) · Ollama (+ sentence-transformers) · MediaPipe/OpenCV · PyTorch (ROCm/CUDA/CPU) · Docker Compose
 
@@ -8,16 +8,16 @@
 
 ## What this is
 
-CareSyncAI V2 evolves the original Caresync AI product (gesture-controlled, WebRTC video telemedicine with Claude-generated reports) into a full multi-agent clinical decision-support system, while keeping every original feature working:
+CareSyncAI V2 is a full-stack, AI-native telemedicine platform that combines gesture-controlled WebRTC video consultations, Claude-generated medical reports, and a real-time multi-agent clinical decision-support system into a unified healthcare platform:
 
-- **17 agents** run in a dependency-ordered, real-time collaborative pipeline (not sequential) — the original 7 (Clinical Review, Medical History, Compliance & Privacy, Triage Escalation, Treatment Recommendation, Insurance Verification, Followup Coordination) plus 10 added in V2 (Chief Orchestrator, Symptom, Diagnostic, Medical Research, Evidence, Hallucination Detection, Quality Assurance, Consensus Moderator, Explanation, Escalation).
+- **17 agents** run in a dependency-ordered, real-time collaborative pipeline (not sequential) — including Clinical Review, Medical History, Compliance & Privacy, Triage Escalation, Treatment Recommendation, Insurance Verification, Follow-up Coordination, Chief Orchestrator, Symptom Analysis, Diagnostic Reasoning, Medical Research, Evidence Retrieval, Hallucination Detection, Quality Assurance, Consensus Moderator, Explanation, and Escalation.
 - **Real consensus**, not a vote count: weighted confidence scoring, moderator tie-breaking, and a dedicated safety-net escalation agent that aggregates every risk signal raised during the run.
-- **Vision pipeline**: MediaPipe-based gesture/pose/face detection, heuristic emotion/pain/movement analysis, and optional speech-emotion analysis, fused into one structured observation that becomes a weighted participant in consensus — not just a UI overlay.
-- **RAG**: hybrid dense (sentence-transformers → Qdrant/FAISS) + BM25 retrieval over a curated clinical guideline corpus, plus live PubMed lookup, with citation tracking and a grounding validator.
-- **Memory**: short-term (per-consultation), shared (cross-agent), and long-term (per-patient, semantic-search-backed) memory, Redis-backed with automatic in-process fallback.
-- **GPU/ROCm**: automatic AMD ROCm → NVIDIA CUDA → CPU device detection, with an Ollama-backed free-model fallback chain for any LLM-upgrade path — the system is fully functional and free-tier-only by default (no paid API key required for the multi-agent pipeline itself).
+- **Vision pipeline**: MediaPipe-based gesture, pose, and face detection, heuristic emotion/pain/movement analysis, and optional speech-emotion analysis, fused into a structured observation that becomes a weighted participant in consensus , not just a UI overlay.
+- **RAG**: Hybrid dense retrieval (sentence-transformers → Qdrant/FAISS) combined with BM25 over a curated clinical guideline corpus, plus live PubMed lookup, with citation tracking and a grounding validator
+- **Memory**: Short-term (per consultation), shared (cross-agent), and long-term (per patient, semantic-search-backed) memory, Redis-backed with automatic in-process fallback.
+- **GPU/ROCm**: Automatic AMD ROCm → NVIDIA CUDA → CPU device detection, with an Ollama-backed free-model fallback chain for future LLM upgrades. The platform is fully functional on the free tier by default, requiring no paid API key for the multi-agent pipeline.
 
-Every one of the above degrades gracefully: no Qdrant → FAISS in-memory; no GPU → CPU; no Ollama → deterministic heuristic; no sentence-transformers → hashed bag-of-words embeddings. The system is designed to run correctly on a laptop with nothing installed beyond the base Python/Node toolchain, and to get measurably better as you add each optional service.
+Every component degrades gracefully: no Qdrant → FAISS in-memory; no GPU → CPU; no Ollama → deterministic heuristics; no sentence-transformers → hashed bag-of-words embeddings. The platform is designed to run correctly on a standard laptop with only the base Python and Node.js toolchain installed, while progressively improving as optional services become available.
 
 ---
 
