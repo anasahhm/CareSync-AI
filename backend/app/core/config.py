@@ -1,5 +1,4 @@
-from typing import List, Union
-from pydantic import field_validator
+from typing import List
 from pydantic_settings import BaseSettings
 
 
@@ -24,7 +23,8 @@ class Settings(BaseSettings):
     # AI
     OPENAI_API_KEY: str = ""
     ANTHROPIC_API_KEY: str = ""
-    AI_PROVIDER: str = "anthropic"  # or "openai"
+    GEMINI_API_KEY: str = ""
+    AI_PROVIDER: str = "anthropic"  # anthropic | openai | gemini | ollama
     AI_MODEL: str = "claude-opus-4-20250514"
 
     # RAG (V2) - free/local only
@@ -40,17 +40,12 @@ class Settings(BaseSettings):
     OLLAMA_FALLBACK_MODEL: str = "llama3"
 
     # CORS
-    CORS_ORIGINS: Union[str, List[str]] = [
-        "http://localhost:3000",
-        "http://localhost:3001",
-    ]
+    # CORS
+    CORS_ORIGINS: str = "http://localhost:3000,http://localhost:3001"
 
-    @field_validator("CORS_ORIGINS", mode="before")
-    @classmethod
-    def split_cors_origins(cls, v):
-        if isinstance(v, str) and not v.strip().startswith("["):
-            return [origin.strip() for origin in v.split(",") if origin.strip()]
-        return v
+    @property
+    def cors_origins_list(self) -> List[str]:
+        return [origin.strip() for origin in self.CORS_ORIGINS.split(",") if origin.strip()]
 
     # File uploads
     UPLOAD_DIR: str = "uploads"
