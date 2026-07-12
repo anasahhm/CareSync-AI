@@ -79,22 +79,15 @@ cp .env.example .env   # add ANTHROPIC_API_KEY/OPENAI_API_KEY if you want paid-t
 docker compose -f docker-compose.amd.yml up -d
 ```
 
-See `docs/DEPLOYMENT.md` for the full breakdown, health-check ordering, and AMD Developer Cloud specifics, and `docs/RUNBOOK.md` for step-by-step verification of every subsystem.
 
 ## Documentation index
 
 | Doc | Contents |
 |---|---|
 | [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) | System diagrams (Mermaid) for every major subsystem |
-| [`docs/SYSTEM_DESIGN.md`](docs/SYSTEM_DESIGN.md) | Design decisions, tradeoffs, limitations, future work |
-| [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) | Docker Compose, AMD Developer Cloud, ROCm setup |
-| [`docs/API_REFERENCE.md`](docs/API_REFERENCE.md) | Every REST endpoint: method, request, response, auth |
-| [`docs/ENVIRONMENT_VARIABLES.md`](docs/ENVIRONMENT_VARIABLES.md) | Full env var table: used-by, required, default |
+| [`docs/API_REFERENCE.md`](docs/API_REFERENCE.md) | Every REST endpoint: method, request, response, auth ||
 | [`docs/RUNBOOK.md`](docs/RUNBOOK.md) | Install/run/verify instructions for every subsystem |
-| [`docs/HACKATHON_PRESENTATION.md`](docs/HACKATHON_PRESENTATION.md) | 2/5/10-minute demo scripts |
-| [`docs/JUDGE_QA.md`](docs/JUDGE_QA.md) | Anticipated judge questions with direct answers |
-| [`docs/DEMO_SCRIPT.md`](docs/DEMO_SCRIPT.md) | Literal click-by-click demo walkthrough |
 
 ## License / disclaimer
 
-This is a hackathon prototype. It is **not** a certified medical device and does not provide medical diagnoses. Every AI-generated recommendation carries an explicit disclaimer and a "requires doctor review" flag when risk or hallucination signals are high — see `docs/SYSTEM_DESIGN.md` for the safety architecture.
+This is a hackathon prototype. It is **not** a certified medical device and does not provide medical diagnoses. Every AI-generated recommendation carries an explicit disclaimer and a "requires doctor review" flag when risk or hallucination signals are high .
