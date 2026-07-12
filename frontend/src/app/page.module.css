@@ -1,0 +1,18 @@
+/* Page-scoped styles for the homepage horizontal scroll / footer reveal.
+   Nothing here touches global styles or any other route. */
+
+.hsTrack {
+  width: max-content;
+}
+
+.hsPanel {
+  scrollbar-width: none; /* Firefox */
+}
+
+.hsPanel::-webkit-scrollbar {
+  display: none; /* Chrome/Safari/Edge */
+}
+
+.footerReveal {
+  will-change: transform;
+}
